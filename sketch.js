@@ -4,7 +4,7 @@ let bubbles = [];
 
 function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(600, 400);
-for(let i = 0; i < 10; i++) {
+for(let i = 0; i < random(10,25); i++) {
 	let x = random(width);
 	let y = random(height);
 	let r = random(20, 60);
