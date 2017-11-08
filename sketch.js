@@ -1,21 +1,17 @@
 let bubbles = [];
 
-//setInterval(400);
-
 function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(600, 400);
 for(let i = 0; i < random(10,25); i++) {
 	let x = random(width);
 	let y = random(height);
-	let r = random(20, 60);
+	let r = 20;
 	let b = new Bubble(x, y, r);
 	bubbles.push(b);
 	}	
-	
 }
 
 function mousePressed() {
-	
 	for(let i = bubbles.length-1; i >= 0; i--){
 		if(bubbles[i].contains(mouseX, mouseY)) {
 			bubbles.splice(i,1);
@@ -60,6 +56,12 @@ class Bubble {
 	move(){
 		this.x = this.x + random(-5,5);
 		this.y = this.y + random(-5,5);
+		
+		/* this.yVelocity+=.006;
+		this.y = this.y + this.yVelocity;
+		if(this.y > height - this.radius*.7) {
+			this.yVelocity = this.yVelocity * -1;
+		}  */
 	}
 	show(){
 		stroke(255);
