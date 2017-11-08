@@ -1,6 +1,7 @@
 let bubbles = [];
+let clockcounter = 20;
 
-//setInterval(400);
+setInterval(clockTick, 1000);
 
 function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(600, 400);
@@ -10,9 +11,15 @@ for(let i = 0; i < random(10,25); i++) {
 	let r = random(20, 60);
 	let b = new Bubble(x, y, r);
 	bubbles.push(b);
-	}	
 	
+	}
 }
+
+function clockTick () {
+	if(clockcounter > 0)
+		clockcounter--;
+}
+
 
 function mousePressed() {
 	
@@ -25,6 +32,8 @@ function mousePressed() {
 
 function draw() { // built-in P5.JS function -=-  automatic loop that repeats forever
 	background(0); 
+	textSize(32);
+	text("Timer: " + clockcounter, 10, 30);
 	for(let i = 0; i < bubbles.length; i++){
 		if(bubbles[i].contains(mouseX, mouseY)){
 			bubbles[i].changeColor(255);
