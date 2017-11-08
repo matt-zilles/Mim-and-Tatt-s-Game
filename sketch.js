@@ -3,6 +3,8 @@ let clockcounter = 20;
 let gameState = "title"
 
 setInterval(clockTick, 1000);
+
+
 function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(600, 400);
 for(let i = 0; i < random(10,25); i++) {
@@ -17,6 +19,8 @@ for(let i = 0; i < random(10,25); i++) {
 function clockTick () {
 	if(clockcounter > 0)
 		clockcounter--;
+}
+
 function mousePressed() {
 	for(let i = bubbles.length-1; i >= 0; i--){
 		if(bubbles[i].contains(mouseX, mouseY)) {
@@ -27,6 +31,7 @@ function mousePressed() {
 
 function draw() { // built-in P5.JS function -=-  automatic loop that repeats forever
 	background(0); 
+	
 	if(gameState=="title"){
 		titleScreen();
 	}else if(gameState=="lose"){
@@ -55,6 +60,7 @@ function titleScreen() {
 	textSize(64);
 	text("Start Game", 150, 200)
 }
+
 class Bubble {
 	constructor(_x, _y, _r){
 		this.x = _x;
