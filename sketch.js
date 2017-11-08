@@ -1,5 +1,6 @@
 let bubbles = [];
 let clockcounter = 20;
+let gameState = "title"
 
 setInterval(clockTick, 1000);
 
@@ -32,6 +33,15 @@ function mousePressed() {
 
 function draw() { // built-in P5.JS function -=-  automatic loop that repeats forever
 	background(0); 
+	
+	if(gameState=="title"){
+		titleScreen();
+	}else if(gameState=="lose"){
+		showLossScreen();
+	}else if(gameState=="win"){
+		showLossScreen();
+	}
+	
 	textSize(32);
 	text("Timer: " + clockcounter, 10, 30);
 	for(let i = 0; i < bubbles.length; i++){
@@ -43,6 +53,14 @@ function draw() { // built-in P5.JS function -=-  automatic loop that repeats fo
 		bubbles[i].move();
 		bubbles[i].show();
 	}
+}
+
+function titleScreen() {
+	stroke("white")
+	strokeWeight(4);
+	fill("black");
+	textSize(64);
+	text("Start Game", 150, 200)
 }
 
 class Bubble {
