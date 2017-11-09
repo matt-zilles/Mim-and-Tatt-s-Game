@@ -1,12 +1,13 @@
 let bubbles = [];
 let clockcounter = 20;
 let gameState = "title"
+let scoreCounter = 0;
 
 setInterval(clockTick, 1000);
 
 
 function setup() { // built-in P5.JS function -=- this runs once
-	createCanvas(600, 400);
+	createCanvas(1000, 750);
 for(let i = 0; i < random(10,25); i++) {
 	let x = random(width);
 	let y = random(height);
@@ -51,6 +52,8 @@ function draw() { // built-in P5.JS function -=-  automatic loop that repeats fo
 		bubbles[i].move();
 		bubbles[i].show();
 	}
+	textSize(32);
+	text("Score: " + scoreCounter, 10, 60)
 }
 
 function titleScreen() {
@@ -58,7 +61,7 @@ function titleScreen() {
 	strokeWeight(4);
 	fill("black");
 	textSize(64);
-	text("Start Game", 150, 200)
+	text("Start Game", 325, 375)
 }
 
 class Bubble {
