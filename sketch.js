@@ -1,16 +1,15 @@
 let bubbles = [];
 let clockcounter = 20;
+let scoreCounter = 0;
 let gameState = "title"
 var x = 0;
 var speed = 0.5;
-var x1 = 100;
-let scoreCounter = 0;
+
 
 setInterval(clockTick, 1000);
 
 
 function setup() { // built-in P5.JS function -=- this runs once
-	createCanvas(600, 400);
 	createCanvas(1000, 750);
 for(let i = 0; i < random(10,25); i++) {
 	let x = random(width);
@@ -115,6 +114,6 @@ class Bubble {
 		stroke(255);
 		strokeWeight(2);
 		fill(0,86,183);
-		rect(x,370,80,25);
+		rect(x,720,80,25);
 	}
 }
