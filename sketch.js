@@ -3,7 +3,7 @@ let clockcounter = 20;
 let scoreCounter = 0;
 let gameState = "title"
 var x = 0;
-var speed = 0.5;
+var speed;
 
 
 setInterval(clockTick, 1000);
@@ -11,7 +11,7 @@ setInterval(clockTick, 1000);
 
 function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(1000, 750);
-for(let i = 0; i < random(10,25); i++) {
+for(let i = 0; i < 10; i++) {
 	let x = random(width);
 	let y = random(height);
 	let r = 20;
@@ -21,25 +21,34 @@ for(let i = 0; i < random(10,25); i++) {
 	
 }
 
+function block() {
+	stroke(255);
+	strokeWeight(2);
+	fill(0,86,183);
+	rect(x,720,80,25);
+	if(keyIsDown(LEFT_ARROW)) {
+		x-=8;
+	}
+	if(keyIsDown(RIGHT_ARROW)) {
+		x+=8;
+	}
+	if(x > width) {
+		speed = -2;
+	}
+	if(x < width) {
+		speed = -2;
+	}
+}
+
 function clockTick () {
 	if(clockcounter > 0)
 		clockcounter--;
 }
 
-function mousePressed() {
-	for(let i = bubbles.length-1; i >= 0; i--){
-		if(bubbles[i].contains(mouseX, mouseY)) {
-			bubbles.splice(i,1);
-		}
-	}
-}
-
 function draw() { // built-in P5.JS function -=-  automatic loop that repeats forever
 	background(0); 
-	if(x > width) {
-		speed = -3;
-	}
-	
+	block();
+	block();
 	if(gameState=="title"){
 		titleScreen();
 	}else if(gameState=="lose"){
@@ -93,27 +102,38 @@ class Bubble {
 	}
 	
 	move(){
-		this.x = this.x + random(-5,5);
-		this.y = this.y + random(-5,5);
-		
-		/* this.yVelocity+=.006;
-		this.y = this.y + this.yVelocity;
-		if(this.y > height - this.radius*.7) {
-			this.yVelocity = this.yVelocity * -1;
-		}  */
+		this.x = this.x + (0);
+		this.y = this.y + (10);
+		if(this.x > width) {
+			this.x = 0;
+		}
+		else if(this.x < 0) {
+			this.x = width;
+		}
+		if(this.y > height) {
+			this.y = 0;
+			this.x = random(0,750);
+		}
+		else if(this.y < 0) {
+			this.y = height;
+		}
 	}
 	show(){
 		stroke(255);
 		strokeWeight(4);
 		fill(this.brightness, 100);
 		ellipse(this.x, this.y, this.r*2, this.r*2);
-	if(keyIsDown(LEFT_ARROW))
-		x-=1;
-	if(keyIsDown(RIGHT_ARROW))
-		x+=1;
-		stroke(255);
-		strokeWeight(2);
-		fill(0,86,183);
-		rect(x,720,80,25);
+	}
+	bounce() {
+		
+		if(this.x > height - r) {
+			speed = -2;
+		}
+		for(let i = bubbles.length-1; i >= 0; i--){
+		if(bubbles[i].contains(x, 750)) {
+			bubbles.splice(i,1);
+			}
+		}
+		
 	}
 }
