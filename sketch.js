@@ -3,8 +3,6 @@ let clockcounter = 20;
 let scoreCounter = 0;
 let gameState = "title"
 var x = 0;
-var speed;
-
 
 setInterval(clockTick, 1000);
 
@@ -21,37 +19,13 @@ for(let i = 0; i < 10; i++) {
 	
 }
 
-function block() {
-	stroke(255);
-	strokeWeight(2);
-	fill(0,86,183);
-	rect(x,720,80,25);
-	if(keyIsDown(LEFT_ARROW)) {
-		x-=8;
-	}
-	if(keyIsDown(RIGHT_ARROW)) {
-		x+=8;
-	}
-	if(x > width) {
-		speed = -2;
-	}
-	if(x < width) {
-		speed = -2;
-	}
-}
-
 function clockTick () {
 	if(clockcounter > 0)
 		clockcounter--;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d1944da07f7452d3748ad47edefe4feae24b5c78
 function draw() { // built-in P5.JS function -=-  automatic loop that repeats forever
 	background(0); 
-	block();
 	block();
 	if(gameState=="title"){
 		titleScreen();
@@ -123,7 +97,6 @@ class Bubble {
 	}
 	
 	move(){
-<<<<<<< HEAD
 		this.x = this.x + (0);
 		this.y = this.y + (10);
 		if(this.x > width) {
@@ -139,11 +112,9 @@ class Bubble {
 		else if(this.y < 0) {
 			this.y = height;
 		}
-=======
 		this.x = this.x + random(-5,5);
 		this.y = this.y + random(-5,5);
 		
->>>>>>> d1944da07f7452d3748ad47edefe4feae24b5c78
 	}
 	show(){
 		stroke(255);
@@ -151,16 +122,48 @@ class Bubble {
 		fill(this.brightness, 100);
 		ellipse(this.x, this.y, this.r*2, this.r*2);
 	}
-	bounce() {
-		
-		if(this.x > height - r) {
-			speed = -2;
-		}
-		for(let i = bubbles.length-1; i >= 0; i--){
-		if(bubbles[i].contains(x, 750)) {
-			bubbles.splice(i,1);
+}
+
+class Plat {
+	constructor() {
+		this.x = 50;
+		this.y = 50;
+		this.width = 15;
+		this.height = 8;
+		this.yspeed = 0.5;
+	}
+	show() {
+		stroke(255);
+		strokeWeight(2);
+		fill(0,86,183);
+		rect(x,720,80,25);
+	}
+	touchingBubble() {
+		for(var i = 0; i < bubbles.length; i++) {
+			if(bubbles[i].contains(this.x, this.y)) {
+				scoreCounter++;
+				bubbles.splice(i,1);
+				return true;
 			}
 		}
+		return false;
+	}
+	move() {
+		this.touchingBubble();
+		if(keyIsDown(LEFT_ARROW)) {
+			x-=8;
+		}
+		if(keyIsDown(RIGHT_ARROW)) {
+			x+=8;
+		}
 		
+	}
+	contains(givenX, givenY) {
+		if(givenX > this.x && givenX < this.x + this.width) {
+			if(givenY > this.y && givenY < this.y + this.height) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
