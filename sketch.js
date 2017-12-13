@@ -1,6 +1,6 @@
 let bubbles = [];
 let clockcounter = 20;
-let scoreCounter = 0;
+let scoreCounter = 1;
 let gameState = "title"
 var x = 0;
 
@@ -26,7 +26,6 @@ function clockTick () {
 
 function draw() { // built-in P5.JS function -=-  automatic loop that repeats forever
 	background(0); 
-	block();
 	if(gameState=="title"){
 		titleScreen();
 	}else if(gameState=="lose"){
@@ -165,5 +164,18 @@ class Plat {
 			}
 		}
 		return false;
+	}
+}
+
+function mousePressed(){
+	gameState="ingame";
+}
+
+function winOrLose(){
+	if(timer == 0 && score > 0){
+		gameState ="win";
+	}
+	else if(score <= 0){
+		gameState="lose";
 	}
 }
