@@ -34,6 +34,7 @@ function draw() { // built-in P5.JS function -=-  automatic loop that repeats fo
 	}else if(gameState=="win"){
 		winScreen();
 	}
+
 	
 	textSize(32);
 	text("Timer: " + clockcounter, 10, 30);
@@ -97,6 +98,7 @@ class Bubble {
 	}
 	
 	move(){
+
 		this.x = this.x + (0);
 		this.y = this.y + (10);
 		if(this.x > width) {
@@ -112,6 +114,7 @@ class Bubble {
 		else if(this.y < 0) {
 			this.y = height;
 		}
+
 		this.x = this.x + random(-5,5);
 		this.y = this.y + random(-5,5);
 		
