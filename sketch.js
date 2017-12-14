@@ -1,3 +1,5 @@
+//JS Bubble Game by Tim and Matt
+
 let bubbles = [];
 let clockcounter = 20;
 let scoreCounter = 1;
