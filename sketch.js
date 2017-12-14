@@ -2,7 +2,7 @@
 
 let bubbles = [];
 let clockcounter = 20;
-let scoreCounter = 0;
+let scoreCounter = 5;
 let gameState = "title"
 var x = 0;
 let plat;
@@ -15,7 +15,7 @@ function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(1000, 750);
 for(let i = 0; i < 2; i++) {
 	let x = random(width);
-	let y = random(height);
+	let y = 0;
 	let r = 20;
 	let b = new Bubble(x, y, r);
 	bubbles.push(b);
@@ -89,28 +89,31 @@ class Bubble {
 	}
 	
 	move(){
+		
+		if(gameState == "ingame")
+		{
+			/* this.x = this.x + (0); */
+			/* this.y = this.y + (10); */
+			if(this.x > width) {
+				this.x = 0;
+			}
+			else if(this.x < 0) {
+				this.x = width;
+			}
+			if(this.y > height) {
+				this.y = 0;
+				this.yspeed = 0;
+				this.x = random(0,750);
+				scoreCounter--;
+			}
+			else if(this.y < 0) {
+				this.y = height;
+			}
 
-		/* this.x = this.x + (0); */
-		/* this.y = this.y + (10); */
-		if(this.x > width) {
-			this.x = 0;
+			this.x = this.x + random(-5,5);
+			this.yspeed += gravity;
+			this.y += this.yspeed;
 		}
-		else if(this.x < 0) {
-			this.x = width;
-		}
-		if(this.y > height) {
-			this.y = 0;
-			this.yspeed = 0;
-			this.x = random(0,750);
-			scoreCounter--;
-		}
-		else if(this.y < 0) {
-			this.y = height;
-		}
-
-		this.x = this.x + random(-5,5);
-		this.yspeed += gravity;
-		this.y += this.yspeed;
 		
 	}
 	show(){
@@ -147,12 +150,15 @@ class Plat {
 		return false;
 	}
 	move() {
-		this.touchingBubble();
-		if(keyIsDown(LEFT_ARROW)) {
-			this.x-=8;
-		}
-		if(keyIsDown(RIGHT_ARROW)) {
-			this.x+=8;
+		if(gameState == "ingame")
+		{
+			this.touchingBubble();
+			if(keyIsDown(LEFT_ARROW)) {
+				this.x-=8;
+			}
+			if(keyIsDown(RIGHT_ARROW)) {
+				this.x+=8;
+			}
 		}
 		
 	}
@@ -176,10 +182,6 @@ function winOrLose(){
 	}
 	else if(scoreCounter <= 0){
 		gameState="lose";
-	checkSide() {
-		if(plat.x > width) {
-			plat.x = 0;
-		}
 	}
 }
 
