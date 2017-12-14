@@ -20,7 +20,7 @@ for(let i = 0; i < 10; i++) {
 }
 
 function clockTick () {
-	if(clockcounter > 0)
+	if(clockcounter > 0 && gameState == "ingame")
 		clockcounter--;
 }
 
@@ -33,6 +33,7 @@ function draw() { // built-in P5.JS function -=-  automatic loop that repeats fo
 	}else if(gameState=="win"){
 		winScreen();
 	}
+	winOrLose();
 
 	
 	textSize(32);
@@ -57,22 +58,6 @@ function titleScreen() {
 	textSize(64);
 	text("Start Game", 325, 375)
 	text("Click anywhere to play.", 185, 435)
-}
-
-function winScreen() {
-	stroke("white")
-	strokeWeight(4);
-	fill("black");
-	textSize(64);
-	text("You Win!", 325, 375)
-}
-
-function loseScreen() {
-	stroke("white")
-	strokeWeight(4);
-	fill("black");
-	textSize(64);
-	text("You Lose. :(", 325, 375)
 }
 
 class Bubble {
@@ -175,10 +160,26 @@ function mousePressed(){
 }
 
 function winOrLose(){
-	if(timer == 0 && score > 0){
+	if(clockcounter == 0 && scoreCounter > 0){
 		gameState ="win";
 	}
-	else if(score <= 0){
+	else if(scoreCounter <= 0){
 		gameState="lose";
 	}
+}
+
+function winScreen() {
+	stroke("white")
+	strokeWeight(4);
+	fill("black");
+	textSize(64);
+	text("You Win!", 325, 375)
+}
+
+function loseScreen() {
+	stroke("white")
+	strokeWeight(4);
+	fill("black");
+	textSize(64);
+	text("You Lose. :(", 325, 375)
 }
