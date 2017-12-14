@@ -2,23 +2,25 @@
 
 let bubbles = [];
 let clockcounter = 20;
-let scoreCounter = 1;
+let scoreCounter = 0;
 let gameState = "title"
 var x = 0;
+let plat;
+let gravity = 0.1;
 
 setInterval(clockTick, 1000);
 
 
 function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(1000, 750);
-for(let i = 0; i < 10; i++) {
+for(let i = 0; i < 2; i++) {
 	let x = random(width);
 	let y = random(height);
 	let r = 20;
 	let b = new Bubble(x, y, r);
 	bubbles.push(b);
 	}	
-	
+	plat = new Plat();
 }
 
 function clockTick () {
@@ -36,6 +38,8 @@ function draw() { // built-in P5.JS function -=-  automatic loop that repeats fo
 		winScreen();
 	}
 
+	plat.show();
+	plat.move();
 	
 	textSize(32);
 	text("Timer: " + clockcounter, 10, 30);
@@ -83,6 +87,7 @@ class Bubble {
 		this.y = _y;
 		this.r = _r;
 		this.brightness = 0;
+		this.yspeed = 0.5;
 	}
 	
 	changeColor(bright){
@@ -100,8 +105,8 @@ class Bubble {
 	
 	move(){
 
-		this.x = this.x + (0);
-		this.y = this.y + (10);
+		/* this.x = this.x + (0); */
+		/* this.y = this.y + (10); */
 		if(this.x > width) {
 			this.x = 0;
 		}
@@ -110,14 +115,17 @@ class Bubble {
 		}
 		if(this.y > height) {
 			this.y = 0;
+			this.yspeed = 0;
 			this.x = random(0,750);
+			scoreCounter--;
 		}
 		else if(this.y < 0) {
 			this.y = height;
 		}
 
 		this.x = this.x + random(-5,5);
-		this.y = this.y + random(-5,5);
+		this.yspeed += gravity;
+		this.y += this.yspeed;
 		
 	}
 	show(){
@@ -132,21 +140,22 @@ class Plat {
 	constructor() {
 		this.x = 50;
 		this.y = 50;
-		this.width = 15;
-		this.height = 8;
+		this.width = 120;
+		this.height = 120;
 		this.yspeed = 0.5;
 	}
 	show() {
 		stroke(255);
 		strokeWeight(2);
 		fill(0,86,183);
-		rect(x,720,80,25);
+		rect(this.x,600,this.width,this.height);
 	}
 	touchingBubble() {
 		for(var i = 0; i < bubbles.length; i++) {
-			if(bubbles[i].contains(this.x, this.y)) {
-				scoreCounter++;
-				bubbles.splice(i,1);
+			if(this.contains(bubbles[i].x, bubbles[i].y)) {
+				console.log("Touching");
+				scoreCounter += 2;
+				bubbles[i].yspeed = -10;
 				return true;
 			}
 		}
@@ -155,16 +164,16 @@ class Plat {
 	move() {
 		this.touchingBubble();
 		if(keyIsDown(LEFT_ARROW)) {
-			x-=8;
+			this.x-=8;
 		}
 		if(keyIsDown(RIGHT_ARROW)) {
-			x+=8;
+			this.x+=8;
 		}
 		
 	}
 	contains(givenX, givenY) {
-		if(givenX > this.x && givenX < this.x + this.width) {
-			if(givenY > this.y && givenY < this.y + this.height) {
+		if(givenX >= this.x && givenX <= this.x + this.width) {
+			if(givenY >= this.y && givenY <= this.y + this.height) {
 				return true;
 			}
 		}
@@ -182,5 +191,9 @@ function winOrLose(){
 	}
 	else if(score <= 0){
 		gameState="lose";
+	checkSide() {
+		if(plat.x > width) {
+			plat.x = 0;
+		}
 	}
 }
