@@ -41,6 +41,7 @@ function draw() { // built-in P5.JS function -=-  automatic loop that repeats fo
 
 	plat.show();
 	plat.move();
+	plat.checkSide();
 	
 	textSize(32);
 	text("Timer: " + clockcounter, 10, 30);
@@ -126,8 +127,8 @@ class Bubble {
 
 class Plat {
 	constructor() {
-		this.x = 50;
-		this.y = 50;
+		this.x = width/2;
+		this.y = 720;
 		this.width = 120;
 		this.height = 120;
 		this.yspeed = 0.5;
@@ -136,14 +137,14 @@ class Plat {
 		stroke(255);
 		strokeWeight(2);
 		fill(0,86,183);
-		rect(this.x,600,this.width,this.height);
+		rect(this.x,this.y,this.width,this.height);
 	}
 	touchingBubble() {
-		for(var i = 0; i < bubbles.length; i++) {
+		for(var i = bubbles.length-1; i >= 0; i--) {
 			if(this.contains(bubbles[i].x, bubbles[i].y)) {
 				console.log("Touching");
 				scoreCounter += 2;
-				bubbles[i].yspeed = -10;
+				bubbles.splice(i,1);
 				return true;
 			}
 		}
@@ -169,6 +170,14 @@ class Plat {
 			}
 		}
 		return false;
+	}
+	checkSide() {
+		if(plat.x > width) {
+			plat.x = 0;
+		}
+		if(plat.x < 0) {
+			plat.x = 1000;
+		}
 	}
 }
 
