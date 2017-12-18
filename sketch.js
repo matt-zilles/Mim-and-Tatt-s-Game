@@ -10,6 +10,9 @@ let gravity = 0.1;
 
 setInterval(clockTick, 1000);
 
+function preLoad(){
+	sound = loadSound('dustyroom_cartoon_bubble_pop.mp3');
+}
 
 function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(1000, 750);
