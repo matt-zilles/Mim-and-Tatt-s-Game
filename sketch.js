@@ -5,18 +5,23 @@ let clockcounter = 20;
 let scoreCounter = 5;
 let gameState = "title"
 var x = 0;
+var bub = new Audio ("dustyroom_cartoon_bubble_pop.mp3");
 let plat;
 let gravity = 0.1;
+let basket;
 
 setInterval(clockTick, 1000);
 
-function preLoad(){
+
+function preload() {
+	basket = loadImage("https://cdn.glitch.com/28c0b545-c5a4-4e7b-9428-9f54da2789af%2F7.png?1513621463375");
 	sound = loadSound('dustyroom_cartoon_bubble_pop.mp3');
 }
 
+
 function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(1000, 750);
-for(let i = 0; i < 2; i++) {
+for(let i = 0; i < 5; i++) {
 	let x = random(width);
 	let y = 0;
 	let r = 20;
@@ -27,8 +32,14 @@ for(let i = 0; i < 2; i++) {
 }
 
 function clockTick () {
-	if(clockcounter > 0 && gameState == "ingame")
+	if(clockcounter > 0 && gameState == "ingame") {
 		clockcounter--;
+		let x = random(width);
+		let y = 0;
+		let r = 20;
+		let b = new Bubble(x, y, r);
+		bubbles.push(b);
+	}
 }
 
 function draw() { // built-in P5.JS function -=-  automatic loop that repeats forever
@@ -148,6 +159,7 @@ class Plat {
 				console.log("Touching");
 				scoreCounter += 2;
 				bubbles.splice(i,1);
+				bub.play();
 				return true;
 			}
 		}
