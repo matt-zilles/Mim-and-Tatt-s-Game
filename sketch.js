@@ -13,6 +13,8 @@ setInterval(clockTick, 1000);
 
 function preload() {
 	basket = loadImage("https://cdn.glitch.com/28c0b545-c5a4-4e7b-9428-9f54da2789af%2F7.png?1513621463375");
+function preLoad(){
+	sound = loadSound('dustyroom_cartoon_bubble_pop.mp3');
 }
 
 function setup() { // built-in P5.JS function -=- this runs once
