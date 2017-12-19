@@ -8,18 +8,20 @@ var x = 0;
 let plat;
 let gravity = 0.1;
 let basket;
+var bub = new Audio ("dustyroom_cartoon_bubble_pop.mp3");
 
 setInterval(clockTick, 1000);
 
 function preload() {
 	basket = loadImage("https://cdn.glitch.com/28c0b545-c5a4-4e7b-9428-9f54da2789af%2F7.png?1513621463375");
+}
 function preLoad(){
 	sound = loadSound('dustyroom_cartoon_bubble_pop.mp3');
 }
 
 function setup() { // built-in P5.JS function -=- this runs once
 	createCanvas(1000, 750);
-for(let i = 0; i < 5; i++) {
+for(let i = 0; i < 2; i++) {
 	let x = random(width);
 	let y = 0;
 	let r = 20;
@@ -157,6 +159,7 @@ class Plat {
 				console.log("Touching");
 				scoreCounter += 2;
 				bubbles.splice(i,1);
+				bub.play();
 				return true;
 			}
 		}
@@ -207,17 +210,18 @@ function winOrLose(){
 }
 
 function winScreen() {
-	stroke("white")
+	stroke("white");
 	strokeWeight(4);
 	fill("black");
 	textSize(64);
-	text("You Win!", 325, 375)
+	text("You Win!", 325, 375);
 }
 
 function loseScreen() {
-	stroke("white")
+	stroke("white");
 	strokeWeight(4);
 	fill("black");
 	textSize(64);
-	text("You Lose. :(", 325, 375)
+	text("You Lose. :(", 325, 375);
+
 }
