@@ -6,6 +6,8 @@ let scoreCounter = 5;
 let gameState = "title"
 var x = 0;
 var bub = new Audio ("dustyroom_cartoon_bubble_pop.mp3");
+var win = new Audio ("mus.mp3");
+var los = new Audio ("l.mp3");
 let plat;
 let gravity = 0.1;
 let basket;
@@ -214,6 +216,7 @@ function winScreen() {
 	fill("black");
 	textSize(64);
 	text("You Win!", 325, 375);
+	win.play();
 }
 
 function loseScreen() {
@@ -222,4 +225,5 @@ function loseScreen() {
 	fill("black");
 	textSize(64);
 	text("You Lose. :(", 325, 375);
+	los.play();
 }
