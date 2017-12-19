@@ -6,24 +6,16 @@ let scoreCounter = 5;
 let gameState = "title"
 var x = 0;
 var bub = new Audio ("dustyroom_cartoon_bubble_pop.mp3");
+var win = new Audio ("mus.mp3");
+var los = new Audio ("l.mp3");
 let plat;
 let gravity = 0.1;
 let basket;
 
 setInterval(clockTick, 1000);
 
-
 function preload() {
 	basket = loadImage("https://cdn.glitch.com/28c0b545-c5a4-4e7b-9428-9f54da2789af%2F7.png?1513621463375");
-var bub = new Audio ("dustyroom_cartoon_bubble_pop.mp3");
-
-setInterval(clockTick, 1000);
-
-function preload() {
-	basket = loadImage("https://cdn.glitch.com/28c0b545-c5a4-4e7b-9428-9f54da2789af%2F7.png?1513621463375");
-}
-function preLoad(){
-	sound = loadSound('dustyroom_cartoon_bubble_pop.mp3');
 }
 
 
@@ -64,6 +56,7 @@ function draw() { // built-in P5.JS function -=-  automatic loop that repeats fo
 	plat.show();
 	plat.move();
 	plat.checkSide();
+	
 	
 	textSize(32);
 	text("Timer: " + clockcounter, 10, 30);
@@ -223,6 +216,7 @@ function winScreen() {
 	fill("black");
 	textSize(64);
 	text("You Win!", 325, 375);
+	win.play();
 }
 
 function loseScreen() {
@@ -231,5 +225,6 @@ function loseScreen() {
 	fill("black");
 	textSize(64);
 	text("You Lose. :(", 325, 375);
+	los.play();
 
 }
