@@ -119,7 +119,7 @@ class Bubble {
 				this.y = 0;
 				this.yspeed = 0;
 				this.x = random(0,750);
-				scoreCounter--;
+				scoreCounter -= 2;
 			}
 			else if(this.y < 0) {
 				this.y = height;
@@ -141,7 +141,7 @@ class Bubble {
 
 class Plat {
 	constructor() {
-		this.x = width/2;
+		this.x = width/2 - 90;
 		this.y = 720;
 		this.width = 120;
 		this.height = 120;
@@ -157,7 +157,7 @@ class Plat {
 		for(var i = bubbles.length-1; i >= 0; i--) {
 			if(this.contains(bubbles[i].x, bubbles[i].y)) {
 				console.log("Touching");
-				scoreCounter += 2;
+				scoreCounter += 1;
 				bubbles.splice(i,1);
 				bub.play();
 				return true;
